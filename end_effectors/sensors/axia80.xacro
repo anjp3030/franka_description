@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<robot name="axia80" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="axia80" params="description_pkg:=franka_description parent_link child_link">
+
+    <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
+    </material>
+
+    <link name="flange_up">
+    <inertial>
+        <origin xyz="-1.5697319924037073e-05 -1.485095506063596e-17 0.013252309226883148" rpy="0 0 0"/>
+        <mass value="0.07655186973325044"/>
+        <inertia ixx="2.5e-05" iyy="2.5e-05" izz="4.1e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <mesh filename="package://${description_pkg}/meshes/robot_ee/sensors/flange_up.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <mesh filename="package://${description_pkg}/meshes/robot_ee/sensors/flange_up.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+    </link>
+
+
+    <link name="ft_sensor">
+    <inertial>
+        <origin xyz="-2.9610028090728775e-05 -9.778967141110353e-08 0.016020088169806927" rpy="0 0 0"/>
+        <mass value="1.0588256660242286"/>
+        <inertia ixx="0.000451" iyy="0.00045" izz="0.000707" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+        <origin xyz="0.0 0.0 -0.0" rpy="0 0 0"/>
+        <geometry>
+        <mesh filename="package://${description_pkg}/meshes/robot_ee/sensors/axia80.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+    </visual>
+    <collision>
+        <origin xyz="0.0 0.0 -0.0" rpy="0 0 0"/>
+        <geometry>
+        <mesh filename="package://${description_pkg}/meshes/robot_ee/sensors/axia80.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+    </link>
+
+    <link name="flange_down">
+    <inertial>
+        <origin xyz="-1.5697319924037073e-05 -1.485095506063596e-17 0.013252309226883148" rpy="0 0 0"/>
+        <mass value="0.07655186973325044"/>
+        <inertia ixx="2.5e-05" iyy="2.5e-05" izz="4.1e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <mesh filename="package://${description_pkg}/meshes/robot_ee/sensors/flange_down.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <mesh filename="package://${description_pkg}/meshes/robot_ee/sensors/flange_down.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+    </link>
+
+     <link name="camera_hand">
+        <inertial>
+            <origin rpy="0 0 0" xyz="-1.5697319924037073e-05 -1.485095506063596e-17 0.013252309226883148"/>
+            <mass value="0.07655186973325044"/>
+            <inertia ixx="2.5e-05" ixy="-0.0" ixz="0.0" iyy="2.5e-05" iyz="-0.0" izz="4.1e-05"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 -0.0 0"/>
+            <geometry>
+                <mesh filename="package://franka_description/meshes/robot_ee/sensors/camera_hand.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+        <origin rpy="0 0 0" xyz="0 -0.0 0"/>
+        <geometry>
+            <mesh filename="package://franka_description/meshes/robot_ee/sensors/camera_hand.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_ft" type="fixed">
+        <parent link="${parent_link}"/>
+        <child link="flange_up"/>
+        <origin rpy="-1.57 0 2.33" xyz="0.0 0.0 0.011"/>
+    </joint>
+
+
+    <joint name="joint_ft_up" type="fixed">
+        <origin rpy="0 0 0" xyz="-0.041 -0.025 -0.041"/>
+        <parent link="flange_up"/>
+        <child link="ft_sensor"/>
+    </joint>
+
+    <joint name="joint_ft_down" type="fixed">
+        <origin rpy="0 0 0" xyz="0.041 0.0 0.041"/>
+        <parent link="ft_sensor"/>
+        <child link="flange_down"/>
+    </joint>
+
+    <joint name="joint_ft_cam" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 -0.023 0.0"/>
+        <parent link="flange_down"/>
+        <child link="camera_hand"/>
+    </joint>
+
+    
+
+
+  </xacro:macro>
+
+</robot>
