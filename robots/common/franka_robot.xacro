@@ -64,7 +64,7 @@
       <xacro:axia80 description_pkg="franka_description" parent_link="${arm_prefix_modified}${connection}" child_link="camera_hand"/>
       <!-- Realsense D455 추가 -->
 
-      <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
+      <xacro:include filename="$(find franka_description)/end_effectors/sensors/_d435.urdf.xacro"/>
       <xacro:arg name="use_nominal_extrinsics" default="false"/>
 
       <xacro:sensor_d435 parent="camera_hand" name="d435" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">

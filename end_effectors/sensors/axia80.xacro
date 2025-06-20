@@ -77,14 +77,14 @@
             <inertia ixx="2.5e-05" ixy="-0.0" ixz="0.0" iyy="2.5e-05" iyz="-0.0" izz="4.1e-05"/>
         </inertial>
         <visual>
-            <origin rpy="0 0 0" xyz="0 -0.0 0"/>
+            <origin rpy="0 0 0" xyz="0 -0.0 0.0"/>
             <geometry>
                 <mesh filename="package://franka_description/meshes/robot_ee/sensors/camera_hand.stl" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="silver"/>
         </visual>
         <collision>
-        <origin rpy="0 0 0" xyz="0 -0.0 0"/>
+        <origin rpy="0 0 0" xyz="0 -0.0 0.002"/>
         <geometry>
             <mesh filename="package://franka_description/meshes/robot_ee/sensors/camera_hand.stl" scale="0.001 0.001 0.001"/>
         </geometry>
@@ -105,7 +105,7 @@
     </joint>
 
     <joint name="joint_ft_down" type="fixed">
-        <origin rpy="0 0 0" xyz="0.041 0.0 0.041"/>
+        <origin rpy="0 0 0" xyz="0.041 -0.00 0.041"/>
         <parent link="ft_sensor"/>
         <child link="flange_down"/>
     </joint>
