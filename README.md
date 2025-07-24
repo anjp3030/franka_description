@@ -1,8 +1,28 @@
 ## End Effector 추가( F/T sensor 및 Realsense d435i)
 ---
+```
+franka_description/end_effectors/sensors/_d435.urdf.xacro
+franka_description/end_effectors/sensors/axia80.xacro
+```
+Kinematics 및 Rviz visualization을 위한 F/T sensor 및 Realsense D435i urdf.xacro 파일 추가
 
-Kinematics 및 Rviz visualization을 위한 F/T sensor 및 Realsense D435i urdf 파일 추가
+```
+franka_description/meshes/robot_ee/sensors #stl 파일 경로
+```
+franka_description/robots/common/franka_robot.xacro 다음 파일에 F/T senseor 및 Realsense D435추가
+```
+<!-- F/T sensor and camera -->
+      <xacro:include filename="$(find franka_description)/end_effectors/sensors/axia80.xacro" />
+      <xacro:axia80 description_pkg="franka_description" parent_link="${arm_prefix_modified}${connection}" child_link="camera_hand"/>
+      <!-- Realsense D435 추가 -->
 
+      <xacro:include filename="$(find franka_description)/end_effectors/sensors/_d435.urdf.xacro"/>
+      <xacro:arg name="use_nominal_extrinsics" default="false"/>
+
+      <xacro:sensor_d435 parent="camera_hand" name="d435" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
+        <origin xyz="-0.07 -0.007 -0.033" rpy="${pi/2} 0 -${pi*1/3}"/>
+      </xacro:sensor_d435>
+```
 ---
 # Franka Description
 
